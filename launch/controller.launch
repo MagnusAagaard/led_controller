@@ -1,0 +1,14 @@
+<launch>
+    <arg name="port"            default="tcp" />
+    <arg name="status_topic"    default="/roomQueue" />
+    <arg name="mir_robot"       default="True" />
+
+    <node name="rosserial_node" pkg="rosserial_python" type="serial_node.py" output="screen">
+        <param name="port" value="$(arg port)" />
+    </node>
+    
+    <node name="led_controller" pkg="led_controller" type="controller.py" output="screen">
+        <param name="status_topic"  value="$(arg status_topic)" />
+        <param name="mir_robot"     value="$(arg mir_robot)" />
+    </node>
+</launch>
